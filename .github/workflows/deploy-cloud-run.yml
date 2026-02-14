@@ -36,7 +36,11 @@ jobs:
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
       - name: Build image
-        run: docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} \
+            --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
+            -t ${{ env.IMAGE }}:${{ github.sha }} .
 
       - name: Push image
         run: docker push ${{ env.IMAGE }}:${{ github.sha }}
