@@ -11,6 +11,8 @@ on:
 jobs:
   check-branch-protection:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Check if direct push to main
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
