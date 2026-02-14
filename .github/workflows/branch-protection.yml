@@ -18,18 +18,19 @@ jobs:
           echo "Direct push to main branch detected"
           echo "Actor: ${{ github.actor }}"
           echo "Repository owner: ${{ github.repository_owner }}"
-          
+
           # Allow only the repository owner to push directly to main
           if [ "${{ github.actor }}" != "${{ github.repository_owner }}" ]; then
-            echo "❌ Error: Only the repository owner can push directly to main branch."
-            echo "Please create a pull request instead."
+            echo "❌ Error: Only the repository owner can push directly"
+            echo "to main branch. Please create a pull request instead."
             exit 1
           else
             echo "✅ Repository owner can push directly to main branch."
           fi
-      
+
       - name: PR to main branch check
         if: github.event_name == 'pull_request'
         run: |
           echo "✅ Pull request to main branch is allowed"
-          echo "PR #${{ github.event.pull_request.number }} by ${{ github.actor }}"
+          echo "PR #${{ github.event.pull_request.number }}"
+          echo "by ${{ github.actor }}"
