@@ -1,0 +1,6 @@
+# CODEOWNERS file for learn-anything repository
+# This file specifies code owners for the repository
+# Code owners are automatically requested for review when someone opens a pull request
+
+# Global owner - theagilepilot owns all files in the repository
+* @theagilepilot
