@@ -120,7 +120,7 @@ Respond with ONLY a valid JSON object:
 function styleInstructions(style: LearningStyle): string {
   switch (style) {
     case "visual":
-      return "Adapt for VISUAL learners: Use ASCII diagrams, describe charts/flowcharts, use analogies and visual metaphors. Format information in tables where possible.";
+      return "Adapt for VISUAL learners: Use Mermaid diagrams in fenced code blocks (```mermaid), describe charts/flowcharts, use analogies and visual metaphors. Format information in tables where possible.";
     case "mixed":
       return "Adapt for MIXED learners: Balance text explanations with visual descriptions, practical examples, and structured summaries.";
     case "reading_writing":
