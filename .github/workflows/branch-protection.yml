@@ -1,0 +1,38 @@
+name: Branch Protection Check
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  check-branch-protection:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check if direct push to main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "Direct push to main branch detected"
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository owner: ${{ github.repository_owner }}"
+
+          # Allow only the repository owner to push directly to main
+          if [ "${{ github.actor }}" != "${{ github.repository_owner }}" ]; then
+            echo "❌ Error: Only the repository owner can push directly"
+            echo "to main branch. Please create a pull request instead."
+            exit 1
+          else
+            echo "✅ Repository owner can push directly to main branch."
+          fi
+
+      - name: PR to main branch check
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "✅ Pull request to main branch is allowed"
+          echo "PR #${{ github.event.pull_request.number }}"
+          echo "by ${{ github.actor }}"
